@@ -4,6 +4,7 @@ import MyContext from './MyContext';
 
 function Provider({ children }) {
   const [data, setData] = useState([]);
+  const [filterByName, setFiltroNome] = useState('');
 
   useEffect(() => {
     const fetchApi = async () => {
@@ -16,8 +17,13 @@ function Provider({ children }) {
     };
     fetchApi();
   }, []);
+
+  const handleChange = ({ target }) => {
+    setFiltroNome(target.value);
+  };
+
   return (
-    <MyContext.Provider value={ { data } }>
+    <MyContext.Provider value={ { data, filterByName, handleChange } }>
       {children}
     </MyContext.Provider>
   );
