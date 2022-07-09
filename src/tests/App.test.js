@@ -2,9 +2,7 @@ import React from 'react';
 import { render, screen, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
 import App from '../App';
 import userEvent from '@testing-library/user-event';
-// import Provider from '../Context/Provider';
 import testData from '../../cypress/mocks/testData'
-// import { renderHook } from '@testing-library/react-hooks';
 describe('testando geral', () => {
 
   beforeEach(() => {
@@ -18,7 +16,15 @@ describe('testando geral', () => {
     jest.clearAllMocks()
   })
 
-test('I am your test', () => {
+test('verificando o fetch', () => { 
+  render(<App />);
+  const url = 'https://swapi-trybe.herokuapp.com/api/planets/';
+  expect(fetch).toHaveBeenCalled()
+  expect(fetch).toHaveBeenCalledWith(url)
+  // expect(tituloElement).toBeInTheDocument();
+});
+
+test('Testando o titulo', () => {
   render(<App />);
   const tituloElement = screen.getByRole('heading', {  name: /star wars planets/i})
   expect(tituloElement).toBeInTheDocument();
@@ -37,18 +43,15 @@ test('Form', () => {
   expect(inputNumerico).toBeInTheDocument()
   expect(removeBtn).toBeInTheDocument()
   expect(allRemoveBtn).toBeInTheDocument()
-  // expect(screen.getByTestId('name-filter')).toBeInTheDocument()
 });
 test('Tabela', async () => {
   render(<App />);
-//  const tabela = await screen.findByRole('table', '', {timeout: 5000})
   expect(await screen.findByRole('table', '', {timeout: 5000})).toBeInTheDocument()
   expect(document.getElementsByTagName('tr')).toHaveLength(11)
   const row = screen.getByRole('row', {
     name: /home rotation period orbital period diameter climate gravity terrain surface water population films created edited url/i
   });
   expect(row).toBeInTheDocument()
-  // expect(screen.getByTestId('name-filter')).toBeInTheDocument()
 }, 30000);
 test('escrevendo na tabela', async () => {
   render(<App />);
@@ -60,22 +63,6 @@ test('escrevendo na tabela', async () => {
   }) 
 
   
-  // expect(document.getElementsByTagName('tr')).toHaveLength(1)
-  // expect(screen.getByRole('columnheader', {
-  //   name: /tatooine/i
-  // })).toBeInTheDocument()
-  // const coluna = screen.getByTestId('name-filter')
-  // const operador = screen.getByTestId('column-filter')
-  // const inputNumerico = screen.getByTestId('value-filter')
-  // const botaoFilter = screen.getByTestId('button-filter')
-  // userEvent.type(coluna, 'population')
-  // userEvent.type(operador, 'igual a')
-  // userEvent.type(inputNumerico, '')
-  // userEvent.type(inputNumerico, '2000000000')
-  // userEvent.click(botaoFilter)
-  // await waitFor(() => {
-  //   expect(screen.findByRole('columnheader',{  name: /alderaan/i, timeout: 5000})).toBeInTheDocument()
-  // })
 }, 30000);
 test('testando btn de excluir do form', async () => {
   render(<App />);
@@ -133,24 +120,10 @@ test('selecionando cada input e clicando em filtrar', async () => {
   userEvent.type(inputNumerico, '10')
   userEvent.click(botaoFilter)
   expect(document.getElementsByTagName('th')).toHaveLength(78) 
+  expect(document.getElementsByTagName('tr')).toHaveLength(6) 
   
 }, 30000)
-// test('testando Provider', () => {
-//   //  global.fetch = jest.fn().mockResolvedValue({
-//   //     json: jest.fn().mockResolvedValue(testData)
-//   //   })
 
-// //   jest.spyOn(global, "fetch").mockImplementation(() =>
-// // Promise.resolve({
-// //   json: () => Promise.resolve(testData)
-// // }))
-    
-//   const url = 'https://swapi-trybe.herokuapp.com/api/planets/';
-//   expect(fetch).toHaveBeenCalled()
-//   expect(fetch).toHaveBeenCalledWith(url)
-//   const tituloElement = screen.getByRole('heading', {  name: /star wars planets/i})
-//   // expect(tituloElement).toBeInTheDocument();
-// });
 
 })
 
