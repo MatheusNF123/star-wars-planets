@@ -3,11 +3,19 @@ import MyContext from '../Context/MyContext';
 import Form from './Form';
 
 function Tabela() {
-  const { dataFiltrado } = useContext(MyContext);
+  const { dataFiltrado, filterByNumericValues } = useContext(MyContext);
 
   return (
     <>
       <Form />
+      {filterByNumericValues.map((elemento, i) => (
+        <div key={ elemento.filtros + i }>
+          <p>{elemento.filtros}</p>
+          <p>{elemento.compararFilter}</p>
+          <p>{elemento.valorFilter}</p>
+          <button type="button" data-testid="button-remove-filters">X</button>
+        </div>
+      ))}
       <table>
         <thead>
           <tr>

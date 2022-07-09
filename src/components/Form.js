@@ -15,21 +15,13 @@ function Form() {
   const [options, setOptions] = useState(['population',
     'orbital_period', 'diameter', 'rotation_period', 'surface_water']);
 
-  // const arrayFiltroOptions = () => {
-  //   const array = filterByNumericValues.map((elemento) => elemento.filtros);
-  //   return array;
-  // };
-
   useEffect(() => {
     const novasOp = filterByNumericValues.reduce((acc, el) => {
       console.log('red', acc);
       acc = acc.filter((elemento) => !elemento.includes(el.filtros));
       return acc;
     }, [...options]);
-    // const novoArray = options.filter((elemento) => elemento
-    //   .includes(arrayFiltroOptions()));
     setOptions(novasOp);
-    // // console.log(...novoArray);
   }, [filterByNumericValues]);
 
   const handleFilter = ({ target: { name, value } }) => {
@@ -65,11 +57,7 @@ function Form() {
           {options.map((op, i) => (
             <option key={ i + op } value={ op }>{op}</option>
           ))}
-          {/* <option value="population">population</option>
-          <option value="orbital_period">orbital_period</option>
-          <option value="diameter">diameter</option>
-          <option value="rotation_period">rotation_period</option>
-          <option value="surface_water">surface_water</option> */}
+
         </select>
       </label>
       <label htmlFor="compararFilter">
@@ -102,7 +90,7 @@ function Form() {
         onClick={ () => {
           filtrar(todosFiltros);
           setTodosFiltros({
-            filtros: '',
+            filtros: 'population',
             compararFilter: 'maior que',
             valorFilter: '0',
           });
