@@ -67,7 +67,13 @@ function Provider({ children }) {
   };
 
   return (
-    <MyContext.Provider value={ { dataFiltrado, filterByName, handleChange, filtrar } }>
+    <MyContext.Provider
+      value={ { dataFiltrado,
+        filterByName,
+        handleChange,
+        filtrar,
+        filterByNumericValues } }
+    >
       {children}
     </MyContext.Provider>
   );

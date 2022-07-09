@@ -1,13 +1,36 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import MyContext from '../Context/MyContext';
 
+// const options = ['population',
+//   'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
+
 function Form() {
-  const { filterByName, handleChange, filtrar } = useContext(MyContext);
+  const { filterByName,
+    handleChange, filtrar, filterByNumericValues } = useContext(MyContext);
   const [todosFiltros, setTodosFiltros] = useState({
     filtros: 'population',
     compararFilter: 'maior que',
     valorFilter: '0',
   });
+  const [options, setOptions] = useState(['population',
+    'orbital_period', 'diameter', 'rotation_period', 'surface_water']);
+
+  // const arrayFiltroOptions = () => {
+  //   const array = filterByNumericValues.map((elemento) => elemento.filtros);
+  //   return array;
+  // };
+
+  useEffect(() => {
+    const novasOp = filterByNumericValues.reduce((acc, el) => {
+      console.log('red', acc);
+      acc = acc.filter((elemento) => !elemento.includes(el.filtros));
+      return acc;
+    }, [...options]);
+    // const novoArray = options.filter((elemento) => elemento
+    //   .includes(arrayFiltroOptions()));
+    setOptions(novasOp);
+    // // console.log(...novoArray);
+  }, [filterByNumericValues]);
 
   const handleFilter = ({ target: { name, value } }) => {
     setTodosFiltros({
@@ -18,6 +41,7 @@ function Form() {
 
   return (
     <form>
+      {console.log(options)}
       <label htmlFor="name">
         Filtrar Pelo nome
         <input
@@ -38,11 +62,14 @@ function Form() {
           onChange={ handleFilter }
           value={ todosFiltros.filtros }
         >
-          <option value="population">population</option>
+          {options.map((op, i) => (
+            <option key={ i + op } value={ op }>{op}</option>
+          ))}
+          {/* <option value="population">population</option>
           <option value="orbital_period">orbital_period</option>
           <option value="diameter">diameter</option>
           <option value="rotation_period">rotation_period</option>
-          <option value="surface_water">surface_water</option>
+          <option value="surface_water">surface_water</option> */}
         </select>
       </label>
       <label htmlFor="compararFilter">
@@ -75,7 +102,7 @@ function Form() {
         onClick={ () => {
           filtrar(todosFiltros);
           setTodosFiltros({
-            filtros: 'population',
+            filtros: '',
             compararFilter: 'maior que',
             valorFilter: '0',
           });
