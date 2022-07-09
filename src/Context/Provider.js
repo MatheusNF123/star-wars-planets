@@ -37,7 +37,7 @@ function Provider({ children }) {
   //   });
   //   setFilterByNumericValues(dataFilter);
   // };
-
+  //
   useEffect(() => {
     let dataFilter = data.filter((nomes) => nomes.name.includes(filterByName));
     dataFilter = filterByNumericValues.reduce((acc, filtro) => {
