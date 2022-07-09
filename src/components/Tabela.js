@@ -1,24 +1,13 @@
 import React, { useContext /* useState */ } from 'react';
 import MyContext from '../Context/MyContext';
+import Form from './Form';
 
 function Tabela() {
-  const { data, filterByName, handleChange } = useContext(MyContext);
+  const { dataFiltrado } = useContext(MyContext);
 
   return (
     <>
-      <form>
-        <label htmlFor="name">
-          Filtrar Pelo nome
-          <input
-            type="text"
-            name="name"
-            id="name"
-            value={ filterByName }
-            data-testid="name-filter"
-            onChange={ handleChange }
-          />
-        </label>
-      </form>
+      <Form />
       <table>
         <thead>
           <tr>
@@ -38,9 +27,7 @@ function Tabela() {
           </tr>
         </thead>
         <tbody>
-          {data.filter((nomeFilter) => (
-            nomeFilter.name.includes(filterByName)
-          )).map((elemento, index) => (
+          {dataFiltrado.map((elemento, index) => (
             <tr key={ index + elemento.name }>
               <th>{elemento.name}</th>
               <th>{elemento.rotation_period}</th>
