@@ -6,22 +6,25 @@ import MyContext from '../Context/MyContext';
 
 function Form() {
   const { filterByName,
-    handleChange, filtrar, filterByNumericValues } = useContext(MyContext);
+    handleChange, filtrar, filterByNumericValues,
+    setFilterByNumericValues } = useContext(MyContext);
   const [todosFiltros, setTodosFiltros] = useState({
     filtros: 'population',
     compararFilter: 'maior que',
     valorFilter: '0',
   });
-  const [options, setOptions] = useState(['population',
-    'orbital_period', 'diameter', 'rotation_period', 'surface_water']);
+  // const [options, setOptions] = useState(['population',
+  //   'orbital_period', 'diameter', 'rotation_period', 'surface_water']);
+  const [optionsBackup, setoptionsBackup] = useState([]);
 
   useEffect(() => {
+    const options = ['population',
+      'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
     const novasOp = filterByNumericValues.reduce((acc, el) => {
-      console.log('red', acc);
-      acc = acc.filter((elemento) => !elemento.includes(el.filtros));
+      acc = acc.filter((elemento) => elemento !== el.filtros);
       return acc;
     }, [...options]);
-    setOptions(novasOp);
+    setoptionsBackup(novasOp);
   }, [filterByNumericValues]);
 
   const handleFilter = ({ target: { name, value } }) => {
@@ -33,7 +36,6 @@ function Form() {
 
   return (
     <form>
-      {console.log(options)}
       <label htmlFor="name">
         Filtrar Pelo nome
         <input
@@ -54,7 +56,7 @@ function Form() {
           onChange={ handleFilter }
           value={ todosFiltros.filtros }
         >
-          {options.map((op, i) => (
+          {optionsBackup.map((op, i) => (
             <option key={ i + op } value={ op }>{op}</option>
           ))}
 
@@ -93,11 +95,20 @@ function Form() {
             filtros: 'population',
             compararFilter: 'maior que',
             valorFilter: '0',
+            id: Math.random(),
           });
         } }
 
       >
         Filtrar
+
+      </button>
+      <button
+        type="button"
+        data-testid="button-remove-filters"
+        onClick={ () => setFilterByNumericValues([]) }
+      >
+        Remover todas filtragens
 
       </button>
     </form>

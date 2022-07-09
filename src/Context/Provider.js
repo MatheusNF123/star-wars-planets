@@ -66,13 +66,21 @@ function Provider({ children }) {
     setFilterByNumericValues([...filterByNumericValues, objeto]);
   };
 
+  const removeDoArray = (id) => {
+    const removerList = filterByNumericValues.filter((e) => e.id !== id);
+    setFilterByNumericValues(removerList);
+    console.log(filterByNumericValues);
+  };
+
   return (
     <MyContext.Provider
       value={ { dataFiltrado,
         filterByName,
         handleChange,
         filtrar,
-        filterByNumericValues } }
+        filterByNumericValues,
+        removeDoArray,
+        setFilterByNumericValues } }
     >
       {children}
     </MyContext.Provider>
