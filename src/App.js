@@ -5,9 +5,12 @@ import Tabela from './components/Tabela';
 //
 function App() {
   return (
-    <Provider>
-      <Tabela />
-    </Provider>
+    <>
+      <h1>Star Wars Planets</h1>
+      <Provider>
+        <Tabela />
+      </Provider>
+    </>
   );
 }
 
