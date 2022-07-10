@@ -211,8 +211,11 @@ test('testando o input de Ordenar e o desc e unknown', async () => {
       expect(todosNomeDePlaneta[8]).toHaveTextContent('Hoth')
       expect(todosNomeDePlaneta[9]).toHaveTextContent('Dagobah')  
 
+      const unknown = document.getElementsByTagName('th')
+      expect(unknown[125]).toHaveTextContent('unknown')
+      expect(unknown[138]).toHaveTextContent('unknown')
 
-      
+
 
 }, 30000)
 
@@ -262,7 +265,52 @@ test('testando o input de Ordenar, dsc e unknown 2', async () => {
     expect(todosNomeDePlaneta[8]).toHaveTextContent('Bespin')  
       expect(todosNomeDePlaneta[9]).toHaveTextContent('Coruscant')
 
+
+      const unknown = document.getElementsByTagName('th')
+     
+      expect(unknown[137]).toHaveTextContent('unknown')
+
 }, 30000)
+test('testando ', async () => {
+  render(<App />);
+  
+  const btnOrdenar = await screen.findByTestId('column-sort-button', '', {timeout: 5000})
+  const btnFilter = screen.getByTestId('button-filter')
+  const column = screen.getByTestId('column-filter')
+  const operador = screen.getByTestId('comparison-filter')
+  const inputNumero = screen.getByTestId('value-filter')
+
+  userEvent.selectOptions(operador, 'menor que')
+  userEvent.selectOptions(column, 'orbital_period')
+  userEvent.clear(inputNumero)
+  userEvent.type(inputNumero, '550')
+  userEvent.click(btnFilter)
+
+    const inputOrdenar = screen.getByTestId('column-sort')
+    const inputRadio = screen.getByTestId('column-sort-input-desc')
+    userEvent.selectOptions(inputOrdenar, 'population')
+    userEvent.click(inputRadio)
+    userEvent.click(btnOrdenar)
+    const todosNomeDePlaneta = await screen.findAllByTestId('planet-name', '', {timeout: 5000})
+    expect(todosNomeDePlaneta).toHaveLength(8)
+    expect(todosNomeDePlaneta[0]).toHaveTextContent('Coruscant')
+    expect(todosNomeDePlaneta[1]).toHaveTextContent('Naboo')
+    expect(todosNomeDePlaneta[2]).toHaveTextContent('Alderaan')
+    expect(todosNomeDePlaneta[3]).toHaveTextContent('Kamino')
+    expect(todosNomeDePlaneta[4]).toHaveTextContent('Endor')
+    expect(todosNomeDePlaneta[5]).toHaveTextContent('Tatooine')
+    expect(todosNomeDePlaneta[6]).toHaveTextContent('Hoth')
+    expect(todosNomeDePlaneta[7]).toHaveTextContent('Dagobah')
+
+
+      // const unknown = document.getElementsByTagName('th')
+     
+      // expect(unknown[137]).toHaveTextContent('unknown')
+
+}, 30000)
+
+
+
 
 
 
