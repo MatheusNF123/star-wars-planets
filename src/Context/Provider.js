@@ -7,6 +7,7 @@ function Provider({ children }) {
   const [dataFiltrado, setDataFiltrado] = useState([]);
   const [filterByName, setFiltroNome] = useState('');
   const [filterByNumericValues, setFilterByNumericValues] = useState([]);
+  const [order, setOrder] = useState({});
 
   useEffect(() => {
     const fetchApi = async () => {
@@ -19,25 +20,29 @@ function Provider({ children }) {
     fetchApi();
   }, []);
 
-  // const filtrarInputs = () => {
-  //   const dataFilter = data.filter((elemento) => {
-  //     const { compararFilter, valorFilter, filtros } = filterByNumericValues;
-  //     if (elemento[filtros]
-  //       && compararFilter
-  //       && valorFilter) {
-  //       if (compararFilter === 'maior que') {
-  //         return Number(elemento[filtros]) > Number(valorFilter);
-  //       } if (compararFilter === 'menor que') {
-  //         return Number(elemento[filtros]) < Number(valorFilter);
-  //       } if (compararFilter === 'igual a') {
-  //         return Number(elemento[filtros]) === Number(valorFilter);
-  //       }
-  //     }
-  //     return true;
-  //   });
-  //   setFilterByNumericValues(dataFilter);
-  // };
-  //
+  const ordeNarPeloFiltroASC = (array) => {
+    const UM = 1;
+    return array.sort((a, b) => {
+      if (a[order.column] === 'unknown') return 1;
+      if (b[order.column] === 'unknown') return -UM;
+      return Number(a[order.column]) - Number(b[order.column]);
+    });
+  };
+
+  const ordeNarPeloFiltroDSC = (array) => {
+    const UM = 1;
+    return array.sort((a, b) => {
+      if (a[order.column] === 'unknown') return 1;
+      if (b[order.column] === 'unknown') return -UM;
+      return Number(b[order.column]) - Number(a[order.column]);
+    });
+  };
+
+  const oderdenarPeloNome = (array) => {
+    const UM = 1;
+    return array.sort((a, b) => (a.name < b.name ? -UM : 1));
+  };
+
   useEffect(() => {
     let dataFilter = data.filter((nomes) => nomes.name.includes(filterByName));
     dataFilter = filterByNumericValues.reduce((acc, filtro) => {
@@ -55,8 +60,36 @@ function Provider({ children }) {
       return acc;
     }, [...dataFilter]);
 
-    setDataFiltrado(dataFilter);
-  }, [data, filterByName, filterByNumericValues]);
+    if (order.sort === 'ASC') {
+      const ASC = ordeNarPeloFiltroASC(dataFilter);
+      setDataFiltrado(ASC);
+    } else if (order.sort === 'DESC') {
+      const DESC = ordeNarPeloFiltroDSC(dataFilter);
+
+      setDataFiltrado(DESC);
+    } else {
+      const filtroPeloNome = oderdenarPeloNome(dataFilter);
+      setDataFiltrado(filtroPeloNome);
+    }
+    // const algumaCoisa = dataFilter.reduce((acc) => {
+    //   if (order.sort === 'ASC') {
+    //     acc.sort((a, b) => {
+    //       if (a[order.column] === 'unknown') return 1;
+    //       if (b[order.column] === 'unknown') return -UM;
+    //       return Number(a[order.column]) - Number(b[order.column]);
+    //     });
+    //   } else if (order.sort === 'DESC') {
+    //     acc.sort((a, b) => {
+    //       if (a[order.column] === 'unknown') return 1;
+    //       if (b[order.column] === 'unknown') return -UM;
+    //       return Number(b[order.column]) - Number(a[order.column]);
+    //     });
+    //   } else {
+    //     acc.sort((a, b) => (a.name < b.name ? -UM : 1));
+    //   }
+    //   return acc;
+    // }, [...dataFilter]);
+  }, [data, filterByName, filterByNumericValues, order]);
 
   const handleChange = ({ target }) => {
     setFiltroNome(target.value);
@@ -72,6 +105,10 @@ function Provider({ children }) {
     console.log(filterByNumericValues);
   };
 
+  const filtrarAD = (filtros) => {
+    setOrder(filtros);
+  };
+
   return (
     <MyContext.Provider
       value={ { dataFiltrado,
@@ -80,7 +117,8 @@ function Provider({ children }) {
         filtrar,
         filterByNumericValues,
         removeDoArray,
-        setFilterByNumericValues } }
+        setFilterByNumericValues,
+        filtrarAD } }
     >
       {children}
     </MyContext.Provider>

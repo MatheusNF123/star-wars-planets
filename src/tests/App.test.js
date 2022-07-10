@@ -68,9 +68,9 @@ test('testando btn de excluir do form', async () => {
   render(<App />);
   const botaoFilter = await screen.findByTestId('button-filter', '', {timeout: 5000})
   userEvent.click(botaoFilter)
-    const resultFiltroColuna = screen.queryByText('population')
+    // const resultFiltroColuna = screen.getByText(/population/i);
     const btnRmvFilter = screen.queryByRole('button', {  name: /x/i})
-    expect(resultFiltroColuna).toBeInTheDocument()
+    // expect(resultFiltroColuna).toBeInTheDocument()
     expect(btnRmvFilter).toBeInTheDocument()
     userEvent.click(btnRmvFilter)
     expect(btnRmvFilter).not.toBeInTheDocument()
@@ -83,13 +83,13 @@ test('testando btn de excluir TUDO do form', async () => {
   const botaoFilter = await screen.findByTestId('button-filter', '', {timeout: 5000})
   const btnRemoveAll = screen.getByRole('button', {  name: /remover todas filtragens/i})
   userEvent.click(botaoFilter)
-    const resultFiltroColuna = screen.queryByText('population')
+    // const resultFiltroColuna = screen.queryByText('population')
     const btnRmvFilter = screen.queryByRole('button', {  name: /x/i})
-    expect(resultFiltroColuna).toBeInTheDocument()
+    // expect(resultFiltroColuna).toBeInTheDocument()
     expect(btnRmvFilter).toBeInTheDocument()
     userEvent.click(btnRemoveAll)
     expect(btnRmvFilter).not.toBeInTheDocument()
-    expect(resultFiltroColuna).not.toBeInTheDocument()
+    // expect(resultFiltroColuna).not.toBeInTheDocument()
   
 
   
@@ -122,6 +122,98 @@ test('selecionando cada input e clicando em filtrar', async () => {
   expect(document.getElementsByTagName('th')).toHaveLength(78) 
   expect(document.getElementsByTagName('tr')).toHaveLength(6) 
   
+}, 30000)
+
+
+test('Testando se os planetas estão ordenado por nome', async () => {
+  render(<App />);
+  const expectedPlanets = ['Alderaan', 'Bespin', 'Coruscant', 'Dagobah', 'Endor', 'Hoth', 'Kamino', 'Naboo', 'Tatooine', 'Yavin IV'];
+  
+  const todosNomeDePlaneta = await screen.findAllByTestId('planet-name', '', {timeout: 5000})
+  expect(todosNomeDePlaneta).toHaveLength(10)
+    expect(todosNomeDePlaneta[0]).toHaveTextContent('Alderaan')
+    expect(todosNomeDePlaneta[1]).toHaveTextContent('Bespin')
+    expect(todosNomeDePlaneta[2]).toHaveTextContent('Coruscant')
+    expect(todosNomeDePlaneta[3]).toHaveTextContent('Dagobah')
+    expect(todosNomeDePlaneta[4]).toHaveTextContent('Endor')
+    expect(todosNomeDePlaneta[5]).toHaveTextContent('Hoth')
+    expect(todosNomeDePlaneta[6]).toHaveTextContent('Kamino')
+    expect(todosNomeDePlaneta[7]).toHaveTextContent('Naboo')
+    expect(todosNomeDePlaneta[8]).toHaveTextContent('Tatooine')
+    expect(todosNomeDePlaneta[9]).toHaveTextContent('Yavin IV')  
+}, 30000)
+test('testando o input de Ordenar e o DESC', async () => {
+  render(<App />);
+  const expectedPlanets = ['Bespin', 'Yavin IV', 'Hoth', 'Kamino', 'Endor', 'Coruscant', 'Alderaan', 'Dagobah', 'Naboo', 'Tatooine'];
+  
+  const btnOrdenar = await screen.findByTestId('column-sort-button', '', {timeout: 5000})
+    const inputOrdenar = screen.getByTestId('column-sort')
+    const inputRadio = screen.getByTestId('column-sort-input-desc')
+    userEvent.selectOptions(inputOrdenar, 'orbital_period')
+    userEvent.click(inputRadio)
+    userEvent.click(btnOrdenar)
+    const todosNomeDePlaneta = await screen.findAllByTestId('planet-name', '', {timeout: 5000})
+    expect(todosNomeDePlaneta).toHaveLength(10)
+      expect(todosNomeDePlaneta[0]).toHaveTextContent('Bespin')
+      expect(todosNomeDePlaneta[1]).toHaveTextContent('Yavin IV')
+      expect(todosNomeDePlaneta[2]).toHaveTextContent('Hoth')
+      expect(todosNomeDePlaneta[3]).toHaveTextContent('Kamino')
+      expect(todosNomeDePlaneta[4]).toHaveTextContent('Endor')
+      expect(todosNomeDePlaneta[5]).toHaveTextContent('Coruscant')
+      expect(todosNomeDePlaneta[6]).toHaveTextContent('Alderaan')
+      expect(todosNomeDePlaneta[7]).toHaveTextContent('Dagobah')
+      expect(todosNomeDePlaneta[8]).toHaveTextContent('Naboo')
+      expect(todosNomeDePlaneta[9]).toHaveTextContent('Tatooine')  
+
+}, 30000)
+test('testando o input de Ordenar e o ASC', async () => {
+  render(<App />);
+  const expectedPlanets = ['Endor', 'Hoth', 'Dagobah', 'Yavin IV', 'Tatooine', 'Naboo', 'Coruscant', 'Alderaan', 'Kamino', 'Bespin'];
+  
+  const btnOrdenar = await screen.findByTestId('column-sort-button', '', {timeout: 5000})
+    const inputOrdenar = screen.getByTestId('column-sort')
+    const inputRadio = screen.getByTestId('column-sort-input-asc')
+    userEvent.selectOptions(inputOrdenar, 'diameter')
+    userEvent.click(inputRadio)
+    userEvent.click(btnOrdenar)
+    const todosNomeDePlaneta = await screen.findAllByTestId('planet-name', '', {timeout: 5000})
+    expect(todosNomeDePlaneta).toHaveLength(10)
+      expect(todosNomeDePlaneta[0]).toHaveTextContent('Endor')
+      expect(todosNomeDePlaneta[1]).toHaveTextContent('Hoth')
+      expect(todosNomeDePlaneta[2]).toHaveTextContent('Dagobah')
+      expect(todosNomeDePlaneta[3]).toHaveTextContent('Yavin IV')
+      expect(todosNomeDePlaneta[4]).toHaveTextContent('Tatooine')
+      expect(todosNomeDePlaneta[5]).toHaveTextContent('Naboo')
+      expect(todosNomeDePlaneta[6]).toHaveTextContent('Coruscant')
+      expect(todosNomeDePlaneta[7]).toHaveTextContent('Alderaan')
+      expect(todosNomeDePlaneta[8]).toHaveTextContent('Kamino')
+      expect(todosNomeDePlaneta[9]).toHaveTextContent('Bespin')  
+
+}, 30000)
+test('testando o input de Ordenar e o ASC e unknown', async () => {
+  render(<App />);
+  const expectedPlanets = ['Coruscant', 'Naboo', 'Alderaan', 'Kamino', 'Endor', 'Bespin', 'Tatooine', 'Yavin IV'];
+    const expectedPlanetsWithUnknownValues = ['Dagobah', 'Hoth'];
+  
+  const btnOrdenar = await screen.findByTestId('column-sort-button', '', {timeout: 5000})
+    const inputOrdenar = screen.getByTestId('column-sort')
+    const inputRadio = screen.getByTestId('column-sort-input-desc')
+    userEvent.selectOptions(inputOrdenar, 'population')
+    userEvent.click(inputRadio)
+    userEvent.click(btnOrdenar)
+    const todosNomeDePlaneta = await screen.findAllByTestId('planet-name', '', {timeout: 5000})
+    expect(todosNomeDePlaneta).toHaveLength(10)
+      expect(todosNomeDePlaneta[0]).toHaveTextContent('Coruscant')
+      expect(todosNomeDePlaneta[1]).toHaveTextContent('Naboo')
+      expect(todosNomeDePlaneta[2]).toHaveTextContent('Alderaan')
+      expect(todosNomeDePlaneta[3]).toHaveTextContent('Kamino')
+      expect(todosNomeDePlaneta[4]).toHaveTextContent('Endor')
+      expect(todosNomeDePlaneta[5]).toHaveTextContent('Bespin')
+      expect(todosNomeDePlaneta[6]).toHaveTextContent('Tatooine')
+      expect(todosNomeDePlaneta[7]).toHaveTextContent('Yavin IV')
+      expect(todosNomeDePlaneta[8]).toHaveTextContent('Hoth')
+      expect(todosNomeDePlaneta[9]).toHaveTextContent('Dagobah')  
+
 }, 30000)
 
 

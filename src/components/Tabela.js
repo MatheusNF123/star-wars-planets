@@ -43,7 +43,7 @@ function Tabela() {
         <tbody>
           {dataFiltrado.map((elemento, index) => (
             <tr key={ index + elemento.name }>
-              <th>{elemento.name}</th>
+              <th data-testid="planet-name">{elemento.name}</th>
               <th>{elemento.rotation_period}</th>
               <th>{elemento.orbital_period}</th>
               <th>{elemento.diameter}</th>

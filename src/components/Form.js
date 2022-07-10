@@ -1,18 +1,24 @@
 import React, { useContext, useState, useEffect } from 'react';
 import MyContext from '../Context/MyContext';
 
-// const options = ['population',
-//   'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
+const optionsOrdenar = ['population',
+  'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
 
 function Form() {
   const { filterByName,
     handleChange, filtrar, filterByNumericValues,
-    setFilterByNumericValues } = useContext(MyContext);
+    setFilterByNumericValues, filtrarAD } = useContext(MyContext);
   const [todosFiltros, setTodosFiltros] = useState({
     filtros: 'population',
     compararFilter: 'maior que',
     valorFilter: '0',
   });
+
+  const [orderFiltro, setOderFiltro] = useState({
+    column: 'population',
+    sort: 'DESC',
+  });
+
   // const [options, setOptions] = useState(['population',
   //   'orbital_period', 'diameter', 'rotation_period', 'surface_water']);
   const [optionsBackup, setoptionsBackup] = useState([]);
@@ -30,6 +36,10 @@ function Form() {
   const handleFilter = ({ target: { name, value } }) => {
     setTodosFiltros({
       ...todosFiltros,
+      [name]: value,
+    });
+    setOderFiltro({
+      ...orderFiltro,
       [name]: value,
     });
   };
@@ -101,6 +111,52 @@ function Form() {
 
       >
         Filtrar
+
+      </button>
+      <label htmlFor="ordenar">
+        Ordenar
+        <select
+          name="column"
+          id="ordenar"
+          value={ orderFiltro.column }
+          data-testid="column-sort"
+          onChange={ handleFilter }
+        >
+          { optionsOrdenar.map(((elemento, i) => (
+            <option key={ elemento + i } value={ elemento }>{elemento}</option>
+          )
+          ))}
+        </select>
+      </label>
+
+      <label htmlFor="sortA">
+        Ascendent
+        <input
+          type="radio"
+          name="sort"
+          id="sortA"
+          value="ASC"
+          onChange={ handleFilter }
+          data-testid="column-sort-input-asc"
+        />
+      </label>
+      <label htmlFor="sortD">
+        Descendent
+        <input
+          type="radio"
+          name="sort"
+          id="sortD"
+          value="DESC"
+          onChange={ handleFilter }
+          data-testid="column-sort-input-desc"
+        />
+      </label>
+      <button
+        type="button"
+        data-testid="column-sort-button"
+        onClick={ () => filtrarAD(orderFiltro) }
+      >
+        Ordenar
 
       </button>
       <button
