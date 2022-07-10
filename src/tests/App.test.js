@@ -303,25 +303,7 @@ test('testando ', async () => {
     expect(todosNomeDePlaneta[7]).toHaveTextContent('Dagobah')
 
 
-      // const unknown = document.getElementsByTagName('th')
-     
-      // expect(unknown[137]).toHaveTextContent('unknown')
-
 }, 30000)
 
 
-
-
-
-
-
-
 })
-
-
-
-
-// jest.spyOn(global, "fetch").mockImplementation(() =>
-// Promise.resolve({
-//   json: () => Promise.resolve(testData)
-// }))
