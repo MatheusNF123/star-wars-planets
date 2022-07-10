@@ -190,11 +190,8 @@ test('testando o input de Ordenar e o ASC', async () => {
       expect(todosNomeDePlaneta[9]).toHaveTextContent('Bespin')  
 
 }, 30000)
-test('testando o input de Ordenar e o ASC e unknown', async () => {
-  render(<App />);
-  const expectedPlanets = ['Coruscant', 'Naboo', 'Alderaan', 'Kamino', 'Endor', 'Bespin', 'Tatooine', 'Yavin IV'];
-    const expectedPlanetsWithUnknownValues = ['Dagobah', 'Hoth'];
-  
+test('testando o input de Ordenar e o desc e unknown', async () => {
+  render(<App />);  
   const btnOrdenar = await screen.findByTestId('column-sort-button', '', {timeout: 5000})
     const inputOrdenar = screen.getByTestId('column-sort')
     const inputRadio = screen.getByTestId('column-sort-input-desc')
@@ -214,7 +211,61 @@ test('testando o input de Ordenar e o ASC e unknown', async () => {
       expect(todosNomeDePlaneta[8]).toHaveTextContent('Hoth')
       expect(todosNomeDePlaneta[9]).toHaveTextContent('Dagobah')  
 
+
+      
+
 }, 30000)
+
+
+test('testando o input de Ordenar , ASC e unknown', async () => {
+  render(<App />);
+  
+  const btnOrdenar = await screen.findByTestId('column-sort-button', '', {timeout: 5000})
+    const inputOrdenar = screen.getByTestId('column-sort')
+    const inputRadio = screen.getByTestId('column-sort-input-asc')
+    userEvent.selectOptions(inputOrdenar, 'surface_water')
+    userEvent.click(inputRadio)
+    userEvent.click(btnOrdenar)
+    const todosNomeDePlaneta = await screen.findAllByTestId('planet-name', '', {timeout: 5000})
+    expect(todosNomeDePlaneta).toHaveLength(10)
+    expect(todosNomeDePlaneta[0]).toHaveTextContent('Bespin')  
+    expect(todosNomeDePlaneta[1]).toHaveTextContent('Tatooine')
+    expect(todosNomeDePlaneta[2]).toHaveTextContent('Yavin IV')
+    expect(todosNomeDePlaneta[3]).toHaveTextContent('Dagobah')
+      expect(todosNomeDePlaneta[4]).toHaveTextContent('Endor')
+      expect(todosNomeDePlaneta[5]).toHaveTextContent('Naboo')
+      expect(todosNomeDePlaneta[6]).toHaveTextContent('Alderaan')
+      expect(todosNomeDePlaneta[7]).toHaveTextContent('Hoth')
+      expect(todosNomeDePlaneta[8]).toHaveTextContent('Kamino')
+      expect(todosNomeDePlaneta[9]).toHaveTextContent('Coruscant')
+
+}, 30000)
+test('testando o input de Ordenar, dsc e unknown 2', async () => {
+  render(<App />);
+  
+  const btnOrdenar = await screen.findByTestId('column-sort-button', '', {timeout: 5000})
+    const inputOrdenar = screen.getByTestId('column-sort')
+    const inputRadio = screen.getByTestId('column-sort-input-desc')
+    userEvent.selectOptions(inputOrdenar, 'surface_water')
+    userEvent.click(inputRadio)
+    userEvent.click(btnOrdenar)
+    const todosNomeDePlaneta = await screen.findAllByTestId('planet-name', '', {timeout: 5000})
+    expect(todosNomeDePlaneta).toHaveLength(10)
+    expect(todosNomeDePlaneta[0]).toHaveTextContent('Hoth')
+    expect(todosNomeDePlaneta[1]).toHaveTextContent('Kamino')
+    expect(todosNomeDePlaneta[2]).toHaveTextContent('Alderaan')
+    expect(todosNomeDePlaneta[3]).toHaveTextContent('Naboo')
+    expect(todosNomeDePlaneta[4]).toHaveTextContent('Yavin IV')
+    expect(todosNomeDePlaneta[5]).toHaveTextContent('Dagobah')
+    expect(todosNomeDePlaneta[6]).toHaveTextContent('Endor')
+    expect(todosNomeDePlaneta[7]).toHaveTextContent('Tatooine')
+    expect(todosNomeDePlaneta[8]).toHaveTextContent('Bespin')  
+      expect(todosNomeDePlaneta[9]).toHaveTextContent('Coruscant')
+
+}, 30000)
+
+
+
 
 
 })
