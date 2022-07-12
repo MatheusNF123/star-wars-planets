@@ -62,12 +62,6 @@ form label {
 }
 
 
-form input:hover {
-  background-color: rgb(56, 56, 56);
-
-
-}
-
 form select {
   background-color: rgb(34, 34, 34);
   border: none;
@@ -77,6 +71,22 @@ form select {
   margin-left: 4px;
   padding: 5px;
   width: 10rem;
+}
+
+
+select:focus, input:focus {
+  box-shadow: 0 0 0 0;
+  outline: 0;
+}
+
+.tipoRadio input {
+  width: 20px;
+}
+
+form input:hover {
+  background-color: rgb(56, 56, 56);
+
+
 }
 
 form select:hover {
@@ -102,15 +112,6 @@ form button:hover {
   align-items: flex-end;
   display: flex;
   flex-direction: column;
-}
-
-.tipoRadio input {
-  width: 20px;
-}
-
-select:focus, input:focus {
-  box-shadow: 0 0 0 0;
-  outline: 0;
 }
 
 /* //tabela// */
