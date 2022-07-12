@@ -10,24 +10,27 @@ function Tabela() {
     <section className="container_tabela">
       <h1 className="titulo">Star Wars Planets</h1>
       <Form />
-      {filterByNumericValues.map((elemento, i) => (
-        <div key={ elemento.filtros + i } data-testid="filter" className="filtros">
-          <p>{elemento.filtros}</p>
-          <p>{elemento.compararFilter}</p>
-          <p>{elemento.valorFilter}</p>
-          <button
-            className="removeBtn"
-            type="button"
-            onClick={ () => removeDoArray(elemento.id) }
+      <div className="divScrol">
+        {filterByNumericValues.map((elemento, i) => (
+          <div key={ elemento.filtros + i } data-testid="filter" className="filtros">
+            <p>{elemento.filtros}</p>
+            <p>{elemento.compararFilter}</p>
+            <p>{elemento.valorFilter}</p>
+            <button
+              className="removeBtn"
+              type="button"
+              onClick={ () => removeDoArray(elemento.id) }
 
-          >
-            <span className="material-symbols-outlined icon">
-              delete
-            </span>
+            >
+              <span className="material-symbols-outlined icon">
+                delete
+              </span>
 
-          </button>
-        </div>
-      ))}
+            </button>
+          </div>
+
+        ))}
+      </div>
       <table>
         <thead>
           <tr className="linha">

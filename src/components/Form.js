@@ -35,7 +35,7 @@ function Form() {
     setoptionsBackup(novasOp);
 
     setTodosFiltros({
-      filtros: novasOp[0],
+      filtros: novasOp[0] || 'population',
       compararFilter: 'maior que',
       valorFilter: '0',
       id: Math.random(),

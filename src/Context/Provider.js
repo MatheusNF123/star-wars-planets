@@ -71,24 +71,6 @@ function Provider({ children }) {
       const filtroPeloNome = oderdenarPeloNome(dataFilter);
       setDataFiltrado(filtroPeloNome);
     }
-    // const algumaCoisa = dataFilter.reduce((acc) => {
-    //   if (order.sort === 'ASC') {
-    //     acc.sort((a, b) => {
-    //       if (a[order.column] === 'unknown') return 1;
-    //       if (b[order.column] === 'unknown') return -UM;
-    //       return Number(a[order.column]) - Number(b[order.column]);
-    //     });
-    //   } else if (order.sort === 'DESC') {
-    //     acc.sort((a, b) => {
-    //       if (a[order.column] === 'unknown') return 1;
-    //       if (b[order.column] === 'unknown') return -UM;
-    //       return Number(b[order.column]) - Number(a[order.column]);
-    //     });
-    //   } else {
-    //     acc.sort((a, b) => (a.name < b.name ? -UM : 1));
-    //   }
-    //   return acc;
-    // }, [...dataFilter]);
   }, [data, filterByName, filterByNumericValues, order]);
 
   const handleChange = ({ target }) => {

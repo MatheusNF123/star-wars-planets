@@ -10,11 +10,11 @@
 }
 
 .titulo {
-  font-size: 3em;
+  font-size: 3.5em;
   margin: auto;
   padding: 15px;
   text-align: center;
-  text-shadow: 0 0 4px rgb(255, 230, 0);
+  text-shadow: 0 0 10px rgb(255, 230, 0);
 }
 
 .container-Form {
@@ -104,14 +104,14 @@ form button:hover {
   flex-direction: column;
 }
 
-/* .tipoRadio input {
+.tipoRadio input {
   width: 20px;
 }
 
 select:focus, input:focus {
   box-shadow: 0 0 0 0;
   outline: 0;
-} */
+}
 
 /* //tabela// */
 .container_tabela {
@@ -174,3 +174,13 @@ tbody tr {
   background-color: #3e3e3e00;
   border: none;
 }
+
+
+.divScrol {
+  max-height: 80px;
+
+  /* height: 80px; */
+  overflow-y: scroll;
+  width: 500px;
+}
+
