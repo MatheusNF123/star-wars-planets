@@ -1,41 +1,176 @@
-.App {
+.container {
+
+  /* background-color: black; */
+  box-sizing: border-box;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+
+}
+
+.titulo {
+  font-size: 3em;
+  margin: auto;
+  padding: 15px;
+  text-align: center;
+  text-shadow: 0 0 4px rgb(255, 230, 0);
+}
+
+.container-Form {
+  width: 100%;
+}
+
+.filtrarPeloNome {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0 25px;
+  width: 100%;
+
+}
+
+form input {
+  background-color: rgb(34, 34, 34);
+  border: none;
+  border-bottom: 2px solid rgb(95, 86, 0);
+  border-radius: 5px;
+  color: white;
+  padding: 5px;
+  width: 10rem;
+
+}
+
+.filtrarPeloNome input {
+  background-color: #3e3e3e;
+  border-radius: 10px;
+  color: white;
+  padding: 8px;
+  width: 20rem;
+}
+
+form {
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+form label {
+  color: white;
+  font-weight: 600;
+}
+
+
+form input:hover {
+  background-color: rgb(56, 56, 56);
+
+
+}
+
+form select {
+  background-color: rgb(34, 34, 34);
+  border: none;
+  border-bottom: 2px solid rgb(95, 86, 0);
+  border-radius: 5px;
+  color: white;
+  margin-left: 4px;
+  padding: 5px;
+  width: 10rem;
+}
+
+form select:hover {
+  background-color: rgb(56, 56, 56);
+
+}
+
+form button {
+  background-color: rgb(34, 34, 34);
+  border: 2px solid rgb(53, 48, 0);
+  border-radius: 5px;
+  color: rgb(163, 152, 0);
+  padding: 10px;
+}
+
+form button:hover {
+  background-color: rgb(56, 56, 56);
+
+}
+
+
+.tipoRadio {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+}
+
+/* .tipoRadio input {
+  width: 20px;
+}
+
+select:focus, input:focus {
+  box-shadow: 0 0 0 0;
+  outline: 0;
+} */
+
+/* //tabela// */
+.container_tabela {
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+
+table {
+  border-collapse: collapse;
+  color: white;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+table th {
+  background-color: rgb(32, 32, 32);
+  padding: 20px;
 }
 
-@media ( prefers-reduced-motion : no-preference ) {
 
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+tbody tr {
+  background-color: #3e3e3e;
+  border-bottom: 2px solid rgb(90, 74, 0);
+  height: 120px;
+
 }
 
-.App-header {
-  align-items: center;
-  background-color: #282c34;
+.filtros {
+
+  /* background-color: aqua; */
   color: white;
   display: flex;
-  flex-direction: column;
-  font-size: calc(10px + 2vmin);
+}
+
+.filtros p {
+  align-items: center;
+  background-color: rgb(49, 49, 49);
+  border: 2px solid white;
+  display: flex;
+  height: 30px;
   justify-content: center;
-  min-height: 100vh;
+
+  /* margin-right: 10px; */
+  width: 150px;
 }
 
-.App-link {
-  color: #61dafb;
+.icon {
+  align-items: center;
+  background-color: rgb(49, 49, 49);
+  border: 2px solid white;
+  color: rgb(194, 0, 0);
+  display: flex;
+  height: 30px;
+  justify-content: center;
 }
 
-@keyframes App-logo-spin {
-
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
+.removeBtn {
+  background-color: #3e3e3e00;
+  border: none;
 }

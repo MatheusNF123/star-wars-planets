@@ -69,7 +69,7 @@ test('testando btn de excluir do form', async () => {
   const botaoFilter = await screen.findByTestId('button-filter', '', {timeout: 5000})
   userEvent.click(botaoFilter)
     // const resultFiltroColuna = screen.getByText(/population/i);
-    const btnRmvFilter = screen.queryByRole('button', {  name: /x/i})
+    const btnRmvFilter = screen.queryByRole('button', {  name: 'delete'})
     // expect(resultFiltroColuna).toBeInTheDocument()
     expect(btnRmvFilter).toBeInTheDocument()
     userEvent.click(btnRmvFilter)
@@ -81,10 +81,10 @@ test('testando btn de excluir do form', async () => {
 test('testando btn de excluir TUDO do form', async () => {
   render(<App />);
   const botaoFilter = await screen.findByTestId('button-filter', '', {timeout: 5000})
-  const btnRemoveAll = screen.getByRole('button', {  name: /remover todas filtragens/i})
+  const btnRemoveAll = screen.getByRole('button', {  name: /Remover Filtros/i})
   userEvent.click(botaoFilter)
     // const resultFiltroColuna = screen.queryByText('population')
-    const btnRmvFilter = screen.queryByRole('button', {  name: /x/i})
+    const btnRmvFilter = screen.queryByRole('button', {  name: 'delete'})
     // expect(resultFiltroColuna).toBeInTheDocument()
     expect(btnRmvFilter).toBeInTheDocument()
     userEvent.click(btnRemoveAll)
@@ -108,18 +108,18 @@ test('selecionando cada input e clicando em filtrar', async () => {
   userEvent.click(botaoFilter)
   
   // const th = await screen.findByTestId('button-filter', '', {timeout: 5000})
-  expect(document.getElementsByTagName('th')).toHaveLength(26)
+  expect(document.getElementsByTagName('th')).toHaveLength(13)
   expect(document.getElementsByTagName('tr')).toHaveLength(2)
-  const btnRemoveAll = screen.getByRole('button', {  name: /remover todas filtragens/i})
+  const btnRemoveAll = screen.getByRole('button', {  name: /Remover Filtros/i})
   userEvent.click(btnRemoveAll)
-  expect(document.getElementsByTagName('th')).toHaveLength(143) 
+  expect(document.getElementsByTagName('th')).toHaveLength(13) 
   
   userEvent.selectOptions(coluna, 'surface_water')
   userEvent.selectOptions(operador, 'menor que')
   userEvent.clear(inputNumerico)
   userEvent.type(inputNumerico, '10')
   userEvent.click(botaoFilter)
-  expect(document.getElementsByTagName('th')).toHaveLength(78) 
+  expect(document.getElementsByTagName('th')).toHaveLength(13) 
   expect(document.getElementsByTagName('tr')).toHaveLength(6) 
   
 }, 30000)
@@ -211,7 +211,7 @@ test('testando o input de Ordenar e o desc e unknown', async () => {
       expect(todosNomeDePlaneta[8]).toHaveTextContent('Hoth')
       expect(todosNomeDePlaneta[9]).toHaveTextContent('Dagobah')  
 
-      const unknown = document.getElementsByTagName('th')
+      const unknown = document.getElementsByTagName('tr')
       expect(unknown[125]).toHaveTextContent('unknown')
       expect(unknown[138]).toHaveTextContent('unknown')
 
@@ -271,7 +271,7 @@ test('testando o input de Ordenar, dsc e unknown 2', async () => {
       expect(unknown[137]).toHaveTextContent('unknown')
 
 }, 30000)
-test('testando ', async () => {
+test('tentando o comportamento dos dois filtros juntos ', async () => {
   render(<App />);
   
   const btnOrdenar = await screen.findByTestId('column-sort-button', '', {timeout: 5000})
