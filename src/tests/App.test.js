@@ -212,8 +212,8 @@ test('testando o input de Ordenar e o desc e unknown', async () => {
       expect(todosNomeDePlaneta[9]).toHaveTextContent('Dagobah')  
 
       const unknown = document.getElementsByTagName('tr')
-      expect(unknown[125]).toHaveTextContent('unknown')
-      expect(unknown[138]).toHaveTextContent('unknown')
+      expect(unknown[9]).toHaveTextContent('unknown')
+      expect(unknown[10]).toHaveTextContent('unknown')
 
 
 
@@ -266,9 +266,9 @@ test('testando o input de Ordenar, dsc e unknown 2', async () => {
       expect(todosNomeDePlaneta[9]).toHaveTextContent('Coruscant')
 
 
-      const unknown = document.getElementsByTagName('th')
+      const unknown = document.getElementsByTagName('td')
      
-      expect(unknown[137]).toHaveTextContent('unknown')
+      expect(unknown[73]).toHaveTextContent('unknown')
 
 }, 30000)
 test('tentando o comportamento dos dois filtros juntos ', async () => {

@@ -84,7 +84,6 @@ function Provider({ children }) {
   const removeDoArray = (id) => {
     const removerList = filterByNumericValues.filter((e) => e.id !== id);
     setFilterByNumericValues(removerList);
-    console.log(filterByNumericValues);
   };
 
   const filtrarAD = (filtros) => {
@@ -100,7 +99,8 @@ function Provider({ children }) {
         filterByNumericValues,
         removeDoArray,
         setFilterByNumericValues,
-        filtrarAD } }
+        filtrarAD,
+      } }
     >
       {children}
     </MyContext.Provider>

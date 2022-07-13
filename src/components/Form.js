@@ -2,15 +2,15 @@ import React, { useContext, useState, useEffect } from 'react';
 import MyContext from '../Context/MyContext';
 import '../App.css';
 
-const optionsOrdenar = ['population',
-  'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
+// const optionsOrdenar = ['population',
+//   'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
 
 function Form() {
   const { filterByName,
     handleChange, filtrar, filterByNumericValues,
     setFilterByNumericValues, filtrarAD } = useContext(MyContext);
 
-  const [optionsBackup, setoptionsBackup] = useState([...optionsOrdenar]);
+  const [optionsBackup, setoptionsBackup] = useState([]);
 
   const [todosFiltros, setTodosFiltros] = useState({
     filtros: optionsBackup[0],
@@ -35,7 +35,7 @@ function Form() {
     setoptionsBackup(novasOp);
 
     setTodosFiltros({
-      filtros: novasOp[0] || 'population',
+      filtros: novasOp[0],
       compararFilter: 'maior que',
       valorFilter: '0',
       id: Math.random(),
@@ -109,7 +109,9 @@ function Form() {
         </label>
         <button
           type="button"
+          className={ !optionsBackup[0] ? 'botaoDesabilitado' : '' }
           data-testid="button-filter"
+          disabled={ !optionsBackup[0] }
           onClick={ () => {
             filtrar(todosFiltros);
             setTodosFiltros({
@@ -132,8 +134,9 @@ function Form() {
             value={ orderFiltro.column }
             data-testid="column-sort"
             onChange={ handleFilter }
+
           >
-            { optionsOrdenar.map(((elemento, i) => (
+            { optionsBackup.map(((elemento, i) => (
               <option key={ elemento + i } value={ elemento }>{elemento}</option>
             )
             ))}

@@ -33,7 +33,7 @@ function Tabela() {
       </div>
       <table>
         <thead>
-          <tr className="linha">
+          <tr>
             <th>Home</th>
             <th>Rotation Period</th>
             <th>Orbital Period</th>
@@ -43,7 +43,7 @@ function Tabela() {
             <th>Terrain</th>
             <th>Surface Water</th>
             <th>Population</th>
-            <th className="films">Films</th>
+            <th>Films</th>
             <th>Created</th>
             <th>Edited</th>
             <th>URL</th>
