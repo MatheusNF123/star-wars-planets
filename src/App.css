@@ -48,6 +48,10 @@ form input {
   width: 20rem;
 }
 
+.filtrarPeloNome input:hover {
+  background-color: #4d4d4d;
+}
+
 form {
   align-items: center;
   display: flex;
@@ -119,6 +123,7 @@ form button:hover {
   background-color: black;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
   width: 100%;
 }
 
@@ -126,7 +131,9 @@ form button:hover {
 table {
   border-collapse: collapse;
   color: white;
+  margin: auto;
   text-align: center;
+  width: 98%;
 }
 
 table th {
@@ -134,11 +141,28 @@ table th {
   padding: 20px;
 }
 
+table th:nth-child( 1 ) {
+  background-color: rgb(32, 32, 32);
+  border-top-left-radius: 10px;
+}
+
+table th:nth-child( 13 ) {
+  background-color: rgb(32, 32, 32);
+  border-top-right-radius: 10px;
+
+}
+
 
 tbody tr {
   background-color: #3e3e3e;
   border-bottom: 2px solid rgb(90, 74, 0);
   height: 120px;
+
+}
+
+tbody tr:hover {
+  background-color: #494949;
+
 
 }
 
@@ -178,11 +202,31 @@ tbody tr {
 
 
 .divScrol {
+  background-color: rgb(22, 22, 22);
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgb(59, 58, 0);
+  margin-bottom: 10px;
+  margin-left: 20px;
   max-height: 80px;
 
   /* height: 80px; */
   overflow-y: scroll;
+  padding: 0 10px;
   width: 500px;
+}
+
+.divScrol::-webkit-scrollbar {
+  width: 12px;               /* width of the entire scrollbar */
+}
+
+.divScrol::-webkit-scrollbar-track {
+  background: rgb(0, 0, 0);        /* color of the tracking area */
+}
+
+.divScrol::-webkit-scrollbar-thumb {
+  background-color: rgb(168, 158, 14);    /* color of the scroll thumb */
+  border: 3px solid rgb(54, 49, 0);  /* creates padding around scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
 }
 
 

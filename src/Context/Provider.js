@@ -44,8 +44,8 @@ function Provider({ children }) {
   };
 
   useEffect(() => {
-    let dataFilter = data.filter((nomes) => nomes.name.includes(filterByName));
-    dataFilter = filterByNumericValues.reduce((acc, filtro) => {
+    // let dataFilter = data.filter((nomes) => nomes.name.includes(filterByName));
+    const dataFilter = filterByNumericValues.reduce((acc, filtro) => {
       if (filtro.compararFilter === 'maior que') {
         acc = acc.filter((planeta) => planeta[filtro
           .filtros] > Number(filtro.valorFilter));
@@ -58,7 +58,7 @@ function Provider({ children }) {
         acc = acc.filter((planeta) => planeta[filtro.filtros] === filtro.valorFilter);
       }
       return acc;
-    }, [...dataFilter]);
+    }, [...data]);
 
     if (order.sort === 'ASC') {
       const ASC = ordeNarPeloFiltroASC(dataFilter);

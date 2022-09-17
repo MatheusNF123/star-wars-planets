@@ -4,7 +4,8 @@ import Form from './Form';
 import '../App.css';
 
 function Tabela() {
-  const { dataFiltrado, filterByNumericValues, removeDoArray } = useContext(MyContext);
+  const { dataFiltrado,
+    filterByNumericValues, removeDoArray, filterByName } = useContext(MyContext);
 
   return (
     <section className="container_tabela">
@@ -34,7 +35,7 @@ function Tabela() {
       <table>
         <thead>
           <tr>
-            <th>Home</th>
+            <th>Name</th>
             <th>Rotation Period</th>
             <th>Orbital Period</th>
             <th>Diameter</th>
@@ -50,23 +51,24 @@ function Tabela() {
           </tr>
         </thead>
         <tbody>
-          {dataFiltrado.map((elemento, index) => (
-            <tr key={ index + elemento.name }>
-              <td data-testid="planet-name">{elemento.name}</td>
-              <td>{elemento.orbital_period}</td>
-              <td>{elemento.diameter}</td>
-              <td>{elemento.climate}</td>
-              <td>{elemento.rotation_period}</td>
-              <td>{elemento.gravity}</td>
-              <td>{elemento.terrain}</td>
-              <td>{elemento.surface_water}</td>
-              <td>{elemento.population}</td>
-              <td>{elemento.films}</td>
-              <td>{elemento.created}</td>
-              <td>{elemento.edited}</td>
-              <td>{elemento.url}</td>
-            </tr>
-          ))}
+          {dataFiltrado.filter((nomes) => nomes.name.includes(filterByName))
+            .map((elemento, index) => (
+              <tr key={ index + elemento.name }>
+                <td data-testid="planet-name">{elemento.name}</td>
+                <td>{elemento.rotation_period}</td>
+                <td>{elemento.orbital_period}</td>
+                <td>{elemento.diameter}</td>
+                <td>{elemento.climate}</td>
+                <td>{elemento.gravity}</td>
+                <td>{elemento.terrain}</td>
+                <td>{elemento.surface_water}</td>
+                <td>{elemento.population}</td>
+                <td>{elemento.films}</td>
+                <td>{elemento.created}</td>
+                <td>{elemento.edited}</td>
+                <td>{elemento.url}</td>
+              </tr>
+            ))}
 
         </tbody>
       </table>
