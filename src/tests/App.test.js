@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
 import App from '../App';
 import userEvent from '@testing-library/user-event';
-import testData from '../../cypress/mocks/testData'
+import testData from '../../mocks/testData'
 describe('testando geral', () => {
 
   beforeEach(() => {
@@ -44,14 +44,11 @@ test('Form', () => {
   expect(removeBtn).toBeInTheDocument()
   expect(allRemoveBtn).toBeInTheDocument()
 });
-test('Tabela', async () => {
+test('testando se a tabela existe e está completa', async () => {
   render(<App />);
   expect(await screen.findByRole('table', '', {timeout: 5000})).toBeInTheDocument()
   expect(document.getElementsByTagName('tr')).toHaveLength(11)
-  const row = screen.getByRole('row', {
-    name: /home rotation period orbital period diameter climate gravity terrain surface water population films created edited url/i
-  });
-  expect(row).toBeInTheDocument()
+
 }, 30000);
 test('escrevendo na tabela', async () => {
   render(<App />);
