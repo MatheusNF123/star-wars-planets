@@ -31,11 +31,6 @@ cd star-wars-planets
 npm start
 ```
 
-### Rodar projeto na máquina
-```
-npm test
-```
-
 ### Rodar os Testes
 ```
 npm test
@@ -49,7 +44,7 @@ npm test
 - React;
 - React Router;
 - Context-API;
-- Redux Hooks;
+- React Hooks;
 
 
 ## Autor 
